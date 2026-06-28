@@ -22,10 +22,13 @@ export class Navigation {
 
         const navLinks = document.querySelectorAll(".nav-links a");
         navLinks.forEach((link, index) => {
-            link.addEventListener("click", (event) => {
+            link.addEventListener("pointerdown", (event) => {
                 // block default button action
                 event.preventDefault(); 
                 this.goto(index); 
+            });
+            link.addEventListener("click", (event) => {
+            event.preventDefault(); 
             });
         });
 

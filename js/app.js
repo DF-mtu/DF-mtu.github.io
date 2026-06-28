@@ -31,7 +31,10 @@ menuButton.addEventListener('pointerdown', () => {
 
 const links = document.querySelectorAll('.nav-links li a');
 links.forEach(link => {
-    link.addEventListener('click', () => {
+    link.addEventListener('pointerdown', () => {
         navLinks.classList.remove('active');
+    });
+    link.addEventListener('click', () => {
+        event.preventDefault(); 
     });
 });
