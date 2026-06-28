@@ -1,4 +1,4 @@
-/* Global Layout */
+/* global */
 
 html,
 body {
@@ -187,4 +187,27 @@ p {
 
     display: none;
 
+}
+
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none; 
+        
+        flex-direction: column; 
+        position: absolute;
+        top: 60px; 
+        left: 0;
+        width: 100%;
+        background-color: #fff; 
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    #menu-button {
+        display: block; 
+    }
+
+    .nav-links.active {
+        display: flex; 
+    }
 }
