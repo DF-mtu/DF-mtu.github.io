@@ -205,6 +205,18 @@ p {
 
     #menu-button {
         display: block; 
+        font-size: 24px; 
+        
+        padding: 12px 16px;  
+        cursor: pointer;
+        
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        
+        min-width: 48px;
+        min-height: 48px;
+        box-sizing: border-box; 
     }
 
     .nav-links.active {

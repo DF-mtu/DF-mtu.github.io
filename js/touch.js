@@ -5,10 +5,10 @@ export class TouchController {
     constructor(navigation) {
         this.navigation = navigation;
         // Minimum distance required to trigger a swipe (px)
-        this.threshold = 50;
+        this.threshold = 30;
 
         // Maximum time allowed for a single swipe (ms)
-        this.timeThreshold = 300;
+        this.timeThreshold = 600;
 
         this.touchStartX = 0;
         this.touchStartY = 0;
