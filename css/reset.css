@@ -1,0 +1,92 @@
+/* universal */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+}
+
+
+body {
+    min-height: 100vh;
+    line-height: 1.5;
+    font-family: sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+ul,
+ol {
+    list-style: none;
+}
+
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: inherit;
+}
+
+
+p {
+    overflow-wrap: break-word;
+}
+
+
+::selection {
+    background: rgba(120, 120, 120, 0.25);
+}
+
+
+html:focus-within {
+    scroll-behavior: smooth;
+}

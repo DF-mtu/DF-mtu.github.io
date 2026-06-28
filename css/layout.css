@@ -1,0 +1,190 @@
+/* Global Layout */
+
+html,
+body {
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: var(--color-background);
+
+    color: var(--color-text);
+
+    font-family: var(--font-family);
+
+}
+
+
+body {
+
+    position: relative;
+
+}
+
+
+#navbar {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: var(--navbar-height);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 0 var(--space-xl);
+
+    background: rgba(255,255,255,0.85);
+
+    backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid var(--color-border);
+
+    z-index: var(--z-navbar);
+
+}
+
+
+.logo {
+
+    font-size: var(--font-size-lg);
+
+    font-weight: var(--font-weight-bold);
+
+}
+
+
+.nav-links {
+
+    display: flex;
+
+    gap: var(--space-lg);
+
+}
+
+
+.nav-links a {
+
+    transition: color var(--transition-fast);
+
+}
+
+
+.nav-links a:hover {
+
+    color: var(--color-primary);
+
+}
+/* todo */
+#menu-button {
+
+    display: none;
+
+    font-size: 1.8rem;
+
+    cursor: pointer;
+
+}
+
+
+#page-container {
+
+    width: 100%;
+
+    height: 100%;
+
+}
+
+.page {
+
+    width: var(--section-width);
+
+    height: var(--section-height);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding:
+
+        calc(var(--navbar-height) + var(--space-lg))
+
+        var(--space-lg)
+
+        var(--space-lg);
+
+}
+
+
+
+.content {
+
+    width: 100%;
+
+    max-width: var(--content-width);
+
+    margin: auto;
+
+}
+
+
+
+h1 {
+
+    font-size: var(--font-size-xxl);
+
+    font-weight: var(--font-weight-bold);
+
+    margin-bottom: var(--space-md);
+
+}
+
+
+h2 {
+
+    font-size: var(--font-size-xl);
+
+    font-weight: var(--font-weight-medium);
+
+    margin-bottom: var(--space-md);
+
+}
+
+
+p {
+
+    font-size: var(--font-size-md);
+
+    line-height: var(--line-height);
+
+    color: var(--color-text-light);
+
+}
+
+
+.center {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+.hidden {
+
+    display: none;
+
+}
