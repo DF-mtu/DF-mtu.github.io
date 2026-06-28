@@ -393,10 +393,10 @@ function drawVoronoi(delaunay) {
     ctx.beginPath();
     
     // boundry shadow pad
-    const pad = 80;
+    const pad = 120;
     ctx.rect(minX - pad, minY - pad, (maxX - minX) + pad * 2, (maxY - minY) + pad * 2);
 
-    // 再次勾勒多边形以形成空洞
+    // polygon voids
     ctx.moveTo(polygon[0][0], polygon[0][1]);
     for (let j = 1; j < polygon.length; j++) {
         ctx.lineTo(polygon[j][0], polygon[j][1]);
