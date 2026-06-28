@@ -9,6 +9,7 @@ const ctx = canvas.getContext("2d");
 
 const modeButton = document.getElementById("modeBtn");
 const clearButton = document.getElementById("clearBtn");
+const shadowButton = document.getElementById("shadowBtn");
 
 // State control
 
@@ -23,6 +24,8 @@ const state = {
     ],
 
     mode: "voronoi",
+
+    shadow: "enable",
 
     pointRadius: 6,
 
@@ -98,6 +101,7 @@ function resizeCanvas() {
 function registerUIEvents() {
     modeButton.addEventListener("click", toggleMode);
     clearButton.addEventListener("click", clearPoints);
+    shadowButton.addEventListener("click", toggleShadow);
 }
 
 
@@ -115,6 +119,18 @@ function toggleMode() {
 
 function clearPoints() {
     state.points = [];
+    requestRender();
+}
+
+function toggleShadow() {
+    if (state.shadow === "enable") {
+        state.shadow = "disable";
+        shadowButton.textContent = "Shadow off";
+    }
+    else {
+        state.shadow = "enable";
+        shadowButton.textContent = "Shadow on";
+    }
     requestRender();
 }
 
@@ -182,7 +198,7 @@ function drawPoints() {
             ctx.fillStyle = "#FFD54F";
             ctx.fill();
         }
-        if (state.mode === "voronoi")
+        if (state.mode === "voronoi" && state.shadow === "enable")
         {
             const dx = p[0] - state.mouseX;
             const dy = p[1] - state.mouseY;
@@ -354,7 +370,6 @@ function drawVoronoi(delaunay) {
         0, 0, canvas.width, canvas.height
     ]);
 
-    // Inner shadow
     for (let i = 0; i < state.points.length; i++) {
     const polygon = voronoi.cellPolygon(i);
     if (!polygon) continue;
@@ -378,37 +393,38 @@ function drawVoronoi(delaunay) {
         if (py > maxY) maxY = py;
     }
     ctx.closePath();
-
     ctx.fillStyle = getCellColor(i);
     ctx.fill();
-    ctx.clip();
+        
+    if (state.shadow === "enable"){
+        ctx.clip();
 
-    const dx = state.points[i][0] - state.mouseX;
-    const dy = state.points[i][1] - state.mouseY;
+        const dx = state.points[i][0] - state.mouseX;
+        const dy = state.points[i][1] - state.mouseY;
 
-    ctx.shadowOffsetX = dx * 0.05;
-    ctx.shadowOffsetY = dy * 0.05;
-    ctx.shadowBlur = 10; 
-    ctx.shadowColor = "rgba(0, 0, 0, 0.8)";
-    ctx.beginPath();
-    
-    // boundry shadow pad
-    const pad = 120;
-    ctx.rect(minX - pad, minY - pad, (maxX - minX) + pad * 2, (maxY - minY) + pad * 2);
+        ctx.shadowOffsetX = dx * 0.05;
+        ctx.shadowOffsetY = dy * 0.05;
+        ctx.shadowBlur = 10; 
+        ctx.shadowColor = "rgba(0, 0, 0, 0.8)";
+        ctx.beginPath();
+        
+        // boundry shadow pad
+        const pad = 120;
+        ctx.rect(minX - pad, minY - pad, (maxX - minX) + pad * 2, (maxY - minY) + pad * 2);
 
-    // polygon voids
-    ctx.moveTo(polygon[0][0], polygon[0][1]);
-    for (let j = 1; j < polygon.length; j++) {
-        ctx.lineTo(polygon[j][0], polygon[j][1]);
+        // polygon voids
+        ctx.moveTo(polygon[0][0], polygon[0][1]);
+        for (let j = 1; j < polygon.length; j++) {
+            ctx.lineTo(polygon[j][0], polygon[j][1]);
+        }
+        ctx.closePath();
+
+        ctx.fillStyle = "black";
+        ctx.fill("evenodd");
+
+        ctx.restore();
+        }
     }
-    ctx.closePath();
-
-    ctx.fillStyle = "black";
-    ctx.fill("evenodd");
-
-    ctx.restore();
-    }
-
     // boundry
     ctx.beginPath();
     voronoi.render(ctx);
