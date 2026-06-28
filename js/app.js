@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const menuButton = document.getElementById('menu-button');
 const navLinks = document.querySelector('.nav-links');
 
-menuButton.addEventListener('click', () => {
+menuButton.addEventListener('pointerdown', () => {
     navLinks.classList.toggle('active');
 });
 

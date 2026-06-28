@@ -10,7 +10,7 @@ export class WheelController {
         this.threshold = 30;
 
         // Minimum time between page switches (ms)
-        this.cooldown = 800;
+        this.cooldown = 50;
 
 
         this.lastScrollTime = 0;
@@ -64,7 +64,7 @@ export class WheelController {
         }
 
     }
-    
+
     destroy() {
 
         window.removeEventListener(

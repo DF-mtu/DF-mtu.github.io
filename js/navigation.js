@@ -7,7 +7,7 @@ export class Navigation {
         this.currentPage = 0;
         this.totalPages = 0;
         this.isAnimating = false;
-        this.animationDuration = 700;
+        this.animationDuration = 200;
     }
 
     initialize() {

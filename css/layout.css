@@ -192,7 +192,8 @@ p {
 @media screen and (max-width: 768px) {
     .nav-links {
         display: none; 
-        
+        gap: 0 !important; 
+        row-gap: 0 !important;
         flex-direction: column; 
         position: absolute;
         top: 60px; 
@@ -221,5 +222,32 @@ p {
 
     .nav-links.active {
         display: flex; 
+    }
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-links li a {
+        display: block;
+        width: 100%;
+        
+        padding: 16px 0;     
+        
+        text-decoration: none;
+        color: #333;
+        
+        transition: background-color 0.2s ease; 
+        
+        border-bottom: 1px solid #f0f0f0; 
+    }
+
+    .nav-links li a:hover,
+    .nav-links li a:active {
+        background-color: #f9f9f9;
+        color: #007aff;
+    }
+    
+    .nav-links li:last-child a {
+        border-bottom: none;
     }
 }
