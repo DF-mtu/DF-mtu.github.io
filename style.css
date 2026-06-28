@@ -1,0 +1,45 @@
+body{
+
+    margin:0;
+
+    overflow:hidden;
+
+    background:#ececec;
+
+    font-family:Arial;
+
+}
+
+#toolbar{
+
+    height:60px;
+
+    background:white;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding-left:20px;
+
+    box-shadow:0 2px 6px rgba(0,0,0,.2);
+
+}
+
+button{
+
+    padding:8px 16px;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+canvas{
+
+    display:block;
+
+}
