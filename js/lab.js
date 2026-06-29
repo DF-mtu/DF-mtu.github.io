@@ -2,6 +2,12 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
+window.onload = function() {
+    setTimeout(function() {
+        window.scrollTo(0,1);
+    }, 0);
+};
+
 const vrConfig = {
     fov: 90,
     singleEyeAspect: 1.0,
