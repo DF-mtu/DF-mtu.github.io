@@ -7,7 +7,9 @@ const vrConfig = {
     fov: 90,
     singleEyeAspect: 1.0,
     eyeSeparation: 0.06,
-    distortionK: 0.3 
+    distortionK: 0.3, 
+    aaSamples: 4, // MSAA
+    shadowMapSize: 512,
 };
 
 const scene = new THREE.Scene();
@@ -18,7 +20,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById("viewer").appendChild(renderer.domElement);
 
 const camera = new THREE.PerspectiveCamera(vrConfig.fov, vrConfig.singleEyeAspect, 0.1, 1000);
-camera.position.set(-1.6, 1.5, -4.5);
+camera.position.set(-1.6, 1.3, -4.5);
 
 const leftCamera = new THREE.PerspectiveCamera();
 const rightCamera = new THREE.PerspectiveCamera();
@@ -28,6 +30,7 @@ const renderTargetParams = {
     minFilter: THREE.LinearFilter,
     magFilter: THREE.LinearFilter,
     format: THREE.RGBAFormat,
+    samples: vrConfig.aaSamples
 };
 const leftTarget = new THREE.WebGLRenderTarget(512, 512, renderTargetParams);
 const rightTarget = new THREE.WebGLRenderTarget(512, 512, renderTargetParams);
@@ -85,15 +88,30 @@ postScene.add(postQuad);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
-controls.target.set(0, 1.2, 0);
+controls.target.set(0, 1.0, 0);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+scene.add(new THREE.AmbientLight(0xffffff, 3));
+const light = new THREE.DirectionalLight(0xffffff, 1.6);
+light.position.set(0.2, 2, -0.2);
 
-scene.add(new THREE.AmbientLight(0xffffff, 2));
-const light = new THREE.DirectionalLight(0xffffff, 3);
-light.position.set(5, 10, 7);
+light.castShadow = true;
+light.shadow.mapSize.width = vrConfig.shadowMapSize;
+light.shadow.mapSize.height = vrConfig.shadowMapSize;
+
+light.shadow.camera.near = 0.5;
+light.shadow.camera.far = 6;
+light.shadow.bias = -0.001;
 scene.add(light);
 
 const loader = new GLTFLoader();
-loader.load("models/lab2.glb", (gltf) => {
+loader.load("assets/models/lab2.glb", (gltf) => {
+    gltf.scene.traverse(function(node) {
+            if (node.isMesh) {
+                node.castShadow = true; 
+                node.receiveShadow = true; 
+            }
+        });
     scene.add(gltf.scene);
 }, undefined, (error) => {
     console.error(error);
