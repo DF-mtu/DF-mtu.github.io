@@ -25,16 +25,13 @@ document.addEventListener("DOMContentLoaded", () => {
 const menuButton = document.getElementById('menu-button');
 const navLinks = document.querySelector('.nav-links');
 
-menuButton.addEventListener('pointerdown', () => {
+menuButton.addEventListener('click', () => {
     navLinks.classList.toggle('active');
 });
 
 const links = document.querySelectorAll('.nav-links li a');
 links.forEach(link => {
-    link.addEventListener('pointerdown', () => {
-        navLinks.classList.remove('active');
-    });
     link.addEventListener('click', () => {
-        event.preventDefault(); 
+        navLinks.classList.remove('active');
     });
 });
