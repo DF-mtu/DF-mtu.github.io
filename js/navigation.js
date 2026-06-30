@@ -29,6 +29,16 @@ export class Navigation {
             });
         });
 
+        const projectCards = document.querySelectorAll(".project-card");
+        projectCards.forEach((card) => {
+            card.addEventListener("click", (event) => {
+                event.preventDefault(); 
+                const targetIndex = parseInt(card.getAttribute("data-page-index"), 10);
+                if (!isNaN(targetIndex)) {
+                    this.goto(targetIndex); 
+                }
+            });
+        });
         this.goto(0, false);
 
         console.log(`Navigation initialized (${this.totalPages} pages).`);

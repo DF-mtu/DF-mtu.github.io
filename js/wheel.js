@@ -32,46 +32,43 @@ export class WheelController {
     }
 
     handleWheel(event) {
-
-        // disable browser scrolling
-        event.preventDefault();
-
         const now = Date.now();
-
-        // CD
         if (now - this.lastScrollTime < this.cooldown) {
             return;
         }
 
         const delta = event.deltaY;
-
-        // Ignore jitter
         if (Math.abs(delta) < this.threshold) {
             return;
         }
 
-        // current time
+        const currentSection = this.navigation.pages[this.navigation.currentPage];
+        
+        if (currentSection) {
+            const scrollTop = currentSection.scrollTop; 
+            const scrollHeight = currentSection.scrollHeight; 
+            const clientHeight = currentSection.clientHeight; 
+            const isOverflowing = scrollHeight > clientHeight;
+
+            if (isOverflowing) {
+                if (delta > 0 && scrollTop + clientHeight < scrollHeight - 2) {
+                    return; 
+                }
+                if (delta < 0 && scrollTop > 2) {
+                    return; 
+                }
+            }
+        }
+
+        event.preventDefault(); 
+
         this.lastScrollTime = now;
 
         if (delta > 0) {
-
             this.navigation.next();
-
         } else {
-
             this.navigation.previous();
-
         }
-
-    }
-
-    destroy() {
-
-        window.removeEventListener(
-            "wheel",
-            this.handleWheel
-        );
-
     }
 
 }
