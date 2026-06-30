@@ -53,42 +53,33 @@ export class TouchController {
     }
 
     handleTouchEnd(event) {
-
-        // Prevent native scrolling
-        event.preventDefault();
-
         const touch = event.changedTouches[0];
 
         const deltaX = touch.clientX - this.touchStartX;
         const deltaY = touch.clientY - this.touchStartY;
         const elapsedTime = Date.now() - this.startTime;
 
-        // Check if the swipe was quick enough and covers enough distance
-        if (elapsedTime > this.timeThreshold ||
-            (Math.abs(deltaX) < this.threshold && Math.abs(deltaY) < this.threshold)) {
+        if (Math.abs(deltaX) < this.threshold && Math.abs(deltaY) < this.threshold) {
+            return; 
+        }
+
+        if (elapsedTime > this.timeThreshold) {
             return;
         }
+
+        event.preventDefault();
 
         // Determine the primary direction of the swipe
         if (Math.abs(deltaX) > Math.abs(deltaY)) {
-
-            return;
-
+            return; // Horizontal swipe, do nothing
         } else {
-
             // Vertical swipe
             if (deltaY > 0) {
-
                 this.navigation.previous(); // Swipe down -> previous page
-
             } else {
-
                 this.navigation.next(); // Swipe up -> next page
-
             }
-
         }
-
     }
 
     destroy() {
