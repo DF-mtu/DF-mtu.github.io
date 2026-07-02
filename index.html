@@ -87,28 +87,28 @@
                 
                 <div class="project-grid">
                     <a href="#" class="project-card" data-page-index="3">
-                        <img src="assets/images/thumbProj1" alt="Project 1">
+                        <img src="assets/images/thumbProj1.png" alt="Project 1">
                         <div class="project-info">
-                            <h3>Isotropic Remeshing</h3>
+                            <h3>Surface Remeshing and Segmentation</h3>
                         </div>
                     </a>
                     
                     <a href="#" class="project-card" data-page-index="4">
-                        <img src="assets/images/thumbProj2" alt="Project 2">
+                        <img src="assets/images/thumbProj2.png" alt="Project 2">
                         <div class="project-info">
                             <h3>CAD Models Automatic Tessellation</h3>
                         </div>
                     </a>
                     
                     <a href="#" class="project-card" data-page-index="5">
-                        <img src="assets/images/thumbProj3" alt="Project 3">
+                        <img src="assets/images/thumbProj3.png" alt="Project 3">
                         <div class="project-info">
                             <h3>VR Distance perception</h3>
                         </div>
                     </a>
                     
                     <a href="#" class="project-card" data-page-index="6">
-                        <img src="assets/images/thumbProj4.jpg" alt="Project 4">
+                        <img src="assets/images/thumbProj4.png" alt="Project 4">
                         <div class="project-info">
                             <h3>AR compatable Acoustic Keyboard</h3>
                         </div>
@@ -120,15 +120,50 @@
         </section>
 
         <section id="project1" class="page">
+            <div class="content project-layout">
+                
+                <div class="project1-header">
+                    <canvas id="project1-canvas"></canvas> 
+                    <a href="voronoi.html" class="full-demo-link" target="_blank">
+                        try the full voronoi demo here!
+                    </a>
+                    <div class="header-content">
+                        <h1>Where It All Began</h1>
+                        <p>
+                            2016, I took on an off-campus apprenticeship and joined the National Laboratory of Pattern Recognition at the Chinese Academy of Sciences. 
+                            It was my very first exposure to a rigorous, fast-paced research environment. 
+                            I was introduced to the foundational concepts of computational geometry and geometric modeling.
+                            I was immediately assigned to my first major project: <b>Surface remeshing and segmentation.</b>  
+                        </p>
+                    </div>
+                </div>
 
-            <div class="content">
-
-                <h1>Project 1</h1>
-                <a href="voronoi.html">Voronoi demo</a>
+                <div class="project-columns">
+                    <div class="project-column">
+                        <h2>Problem</h2>
+                        <p>
+                            Improving element quality in surface remeshing remains a major challenge.
+                            Traditional automatic remeshing algorithms often fail to preserve sharp and thin features.
+                            Existing segmentation methods also cannot efficiently eliminate poor-quality elements near boundaries.
+                        </p>
+                        <img src="assets/images/proj1p.png" alt="Visualization of the remeshing problem">
+                    </div>
+                    <div class="project-column">
+                        <h2>Solution</h2>
+                        <p>
+                            We integrate local mesh operations, including vertex translation and edge flipping/splitting, into a segment-based remeshing pipeline.
+                            This approach generates high-quality, feature-preserving meshes with perfectly clean boundaries.
+                            It effectively eliminates poor-quality elements with negligible changes to the original mesh structure and complexity.
+                        </p>
+                        <img src="assets/images/proj1s.png" alt="Visualization of the implemented solution">
+                    </div>
+                </div>
 
             </div>
-
         </section>
+
+        <script src="https://cdn.jsdelivr.net/npm/d3-delaunay@6"></script>
+        <script src="js/voronoi-banner.js"></script>
 
         <section id="project2" class="page">
 

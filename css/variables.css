@@ -10,15 +10,11 @@
     --color-background: #ffffff;
     --color-surface: #f8fafc;
 
-    --color-text: #222222;
-    --color-text-light: #666666;
+    --color-text: #111111;
+    --color-text-light: #222222;
+    --color-text-white: #f8fafc;
 
     --color-border: #dddddd;
-
-    --color-success: #16a34a;
-    --color-warning: #f59e0b;
-    --color-danger: #dc2626;
-
     --color-shadow: rgba(0, 0, 0, 0.12);
 
 
