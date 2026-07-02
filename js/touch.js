@@ -3,19 +3,22 @@
 export class TouchController {
 
     constructor(navigation) {
+
         this.navigation = navigation;
-        // Minimum distance required to trigger a swipe (px)
+
+        // Minimum swipe distance before changing page
         this.threshold = 30;
 
-        // Maximum time allowed for a single swipe (ms)
-        this.timeThreshold = 600;
+        // Minimum time between page switches (ms)
+        this.cooldown = 500;
 
         this.touchStartX = 0;
         this.touchStartY = 0;
-        this.startTime = 0;
+
+        this.lastSwitchTime = 0;
 
         this.handleTouchStart = this.handleTouchStart.bind(this);
-        this.handleTouchEnd = this.handleTouchEnd.bind(this);
+        this.handleTouchMove = this.handleTouchMove.bind(this);
 
     }
 
@@ -24,12 +27,12 @@ export class TouchController {
         window.addEventListener(
             "touchstart",
             this.handleTouchStart,
-            { passive: false }
+            { passive: true }
         );
 
         window.addEventListener(
-            "touchend",
-            this.handleTouchEnd,
+            "touchmove",
+            this.handleTouchMove,
             { passive: false }
         );
 
@@ -39,7 +42,6 @@ export class TouchController {
 
     handleTouchStart(event) {
 
-        // Ignore multi-touch
         if (event.touches.length > 1) {
             return;
         }
@@ -48,38 +50,86 @@ export class TouchController {
 
         this.touchStartX = touch.clientX;
         this.touchStartY = touch.clientY;
-        this.startTime = Date.now();
 
     }
 
-    handleTouchEnd(event) {
-        const touch = event.changedTouches[0];
+    handleTouchMove(event) {
 
-        const deltaX = touch.clientX - this.touchStartX;
-        const deltaY = touch.clientY - this.touchStartY;
-        const elapsedTime = Date.now() - this.startTime;
-
-        if (Math.abs(deltaX) < this.threshold && Math.abs(deltaY) < this.threshold) {
-            return; 
-        }
-
-        if (elapsedTime > this.timeThreshold) {
+        if (event.touches.length > 1) {
             return;
         }
 
+        const now = Date.now();
+
+        if (now - this.lastSwitchTime < this.cooldown) {
+            return;
+        }
+
+        const touch = event.touches[0];
+
+        const deltaX = touch.clientX - this.touchStartX;
+        const deltaY = touch.clientY - this.touchStartY;
+
+        // Ignore tiny movement
+        if (Math.abs(deltaY) < this.threshold) {
+            return;
+        }
+
+        // Ignore horizontal swipe
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            return;
+        }
+
+        const currentSection =
+            this.navigation.pages[this.navigation.currentPage];
+
+        if (currentSection) {
+
+            const scrollTop = currentSection.scrollTop;
+            const scrollHeight = currentSection.scrollHeight;
+            const clientHeight = currentSection.clientHeight;
+
+            const isOverflowing =
+                scrollHeight > clientHeight;
+
+            if (isOverflowing) {
+
+                // Swipe up (finger moves upward)
+                if (deltaY < 0) {
+
+                    // Still not at bottom -> allow normal scrolling
+                    if (scrollTop + clientHeight < scrollHeight - 2) {
+                        return;
+                    }
+
+                }
+
+                // Swipe down (finger moves downward)
+                else {
+
+                    // Still not at top -> allow normal scrolling
+                    if (scrollTop > 2) {
+                        return;
+                    }
+
+                }
+
+            }
+
+        }
+
+        // Prevent browser bounce / overscroll
         event.preventDefault();
 
-        // Determine the primary direction of the swipe
-        if (Math.abs(deltaX) > Math.abs(deltaY)) {
-            return; // Horizontal swipe, do nothing
-        } else {
-            // Vertical swipe
-            if (deltaY > 0) {
-                this.navigation.previous(); // Swipe down -> previous page
-            } else {
-                this.navigation.next(); // Swipe up -> next page
-            }
+        this.lastSwitchTime = now;
+
+        if (deltaY < 0) {
+            this.navigation.next();
         }
+        else {
+            this.navigation.previous();
+        }
+
     }
 
     destroy() {
@@ -90,8 +140,8 @@ export class TouchController {
         );
 
         window.removeEventListener(
-            "touchend",
-            this.handleTouchEnd
+            "touchmove",
+            this.handleTouchMove
         );
 
     }
