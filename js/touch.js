@@ -6,10 +6,10 @@ export class TouchController {
 
         this.navigation = navigation;
 
-        // Minimum swipe distance before changing page
-        this.threshold = 30;
+        // minimum swipe distance before changing page
+        this.threshold = 50;
 
-        // Minimum time between page switches (ms)
+        // minimum time between page switches (ms)
         this.cooldown = 500;
 
         this.touchStartX = 0;
@@ -35,9 +35,6 @@ export class TouchController {
             this.handleTouchMove,
             { passive: false }
         );
-
-        console.log("Touch controller initialized.");
-
     }
 
     handleTouchStart(event) {
@@ -70,12 +67,12 @@ export class TouchController {
         const deltaX = touch.clientX - this.touchStartX;
         const deltaY = touch.clientY - this.touchStartY;
 
-        // Ignore tiny movement
+        // ignore tiny movement
         if (Math.abs(deltaY) < this.threshold) {
             return;
         }
 
-        // Ignore horizontal swipe
+        // ignore horizontal swipe
         if (Math.abs(deltaX) > Math.abs(deltaY)) {
             return;
         }
@@ -94,20 +91,20 @@ export class TouchController {
 
             if (isOverflowing) {
 
-                // Swipe up (finger moves upward)
+                // swipe up
                 if (deltaY < 0) {
 
-                    // Still not at bottom -> allow normal scrolling
+                    // still not at bottom 
                     if (scrollTop + clientHeight < scrollHeight - 2) {
                         return;
                     }
 
                 }
 
-                // Swipe down (finger moves downward)
+                // swipe down
                 else {
 
-                    // Still not at top -> allow normal scrolling
+                    // still not at top
                     if (scrollTop > 2) {
                         return;
                     }
