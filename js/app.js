@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
     touch.initialize();
 });
 
-
 // menu
 const menuButton = document.getElementById('menu-button');
 const navLinks = document.querySelector('.nav-links');

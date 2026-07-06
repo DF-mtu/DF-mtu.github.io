@@ -115,6 +115,8 @@ body {
 
     align-items: flex-start;
 
+    overflow-y: auto;
+
     padding:
 
         calc(var(--navbar-height) + var(--space-lg))
@@ -125,6 +127,14 @@ body {
 
 }
 
+/* firefox hide scroll bar */
+.page {
+    scrollbar-width: none; 
+}
+/* chrome hide scroll bar */
+.page::-webkit-scrollbar {
+    display: none; 
+}
 
 
 .content {
