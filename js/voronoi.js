@@ -10,6 +10,9 @@ const ctx = canvas.getContext("2d");
 const modeButton = document.getElementById("modeBtn");
 const clearButton = document.getElementById("clearBtn");
 const shadowButton = document.getElementById("shadowBtn");
+const whyBtn = document.getElementById('whyBtn');
+const infoModal = document.getElementById('infoModal');
+const closeBtn = document.getElementById('closeBtn');
 
 // State control
 
@@ -102,8 +105,17 @@ function registerUIEvents() {
     modeButton.addEventListener("click", toggleMode);
     clearButton.addEventListener("click", clearPoints);
     shadowButton.addEventListener("click", toggleShadow);
+    whyBtn.addEventListener('click', () => {infoModal.showModal();});
+    closeBtn.addEventListener('click', () => {infoModal.close();});
 }
-
+infoModal.addEventListener('click', (event) => {
+    const rect = infoModal.getBoundingClientRect();
+    const isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height
+        && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+    if (!isInDialog) {
+        infoModal.close();
+    }
+});
 
 function toggleMode() {
     if (state.mode === "voronoi") {

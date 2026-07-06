@@ -6,7 +6,7 @@ import { TouchController } from "./touch.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    console.log("Website initialized.");
+    // console.log("Website initialized.");
 
     // Navigation
     const navigation = new Navigation();

@@ -1,7 +1,7 @@
 // Interactive Voronoi Viewer simplified for banner
 // Requires: d3-delaunay.js @https://d3js.org/d3-delaunay
 
-const canvas = document.getElementById("project1-canvas");
+const canvas = document.getElementById("project2-canvas");
 const ctx = canvas.getContext("2d");
 
 const state = {
@@ -18,7 +18,6 @@ function requestRender() {
     needsRender = true;
 }
 
-// 3. 初始化 Banner
 function initialize() {
     resizeCanvas();
     registerMouseEvents();

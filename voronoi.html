@@ -23,6 +23,25 @@
     <button id="shadowBtn">
         Shadow
     </button>
+    
+    <button id="whyBtn">What am I looking at?</button>
+
+    <dialog id="infoModal" class="custom-dialog">
+        <div class="dialog-content">
+            <h2>The Geometry of Space</h2>
+            <p>
+                <i>You are interacting with a <b>Voronoi Diagram</b> and its mathematical twin, the <b>Delaunay Triangulation</b>.</i>
+                <br>
+                A Voronoi diagram divides space into distinct territories, where every location inside a cell is closest to its center dot. If you connect the dots of neighboring cells, you create a Delaunay Triangulation. Physically, this creates the most "well-behaved" network of triangles possible, minimizes skinny slivers.
+                <br><br>
+                <b><i>How does this connect to my work?</i></b>
+                <br>
+                This exact geometry is the backbone of 3D computational modeling. When translating CAD models into tangible 3D environments, algorithms like <b>Constrained Delaunay Triangulation</b> are critical. They allow us to tessellate abstract mathematical surfaces into robust, highly accurate triangular meshes that computers can efficiently render and simulate.
+            </p>
+            
+            <button id="closeBtn" class="close-btn">Close</button>
+        </div>
+    </dialog>
 
 </div>
 

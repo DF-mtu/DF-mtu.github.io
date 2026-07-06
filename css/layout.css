@@ -266,7 +266,7 @@ p {
     gap: 30px; 
 }
 
-.project1-header {
+.project2-header {
     position: relative;
     width: 100%;
     height: 250px;       /* banner height */
@@ -282,7 +282,7 @@ p {
     background-color: #1d1d1d; 
 }
 
-#project1-canvas {
+#project2-canvas {
     position: absolute;
     top: 0;
     left: 0;
@@ -292,26 +292,26 @@ p {
     pointer-events: auto; 
 }
 
-.project1-header .header-content {
+.project2-header .header-content {
     position: relative;
     z-index: 2;
     pointer-events: none; 
 }
 
-.project1-header h1 {
+.project2-header h1 {
     margin-top: 5;
     margin-bottom: 5px;
     font-size: 2.5rem; 
     color: white;
 }
 
-.project1-header p {
+.project2-header p {
     max-width: 1000px;
     color: white;
 }
 
 /* demo link */
-.project1-header .full-demo-link {
+.project2-header .full-demo-link {
     position: absolute;
     top: 20px;
     right: 20px;
@@ -329,7 +329,7 @@ p {
 }
 
 /* demo hover */
-.project1-header .full-demo-link:hover {
+.project2-header .full-demo-link:hover {
     color: #FFD54F;                  
     border-color: #FFD54F;
     background-color: rgba(255, 213, 79, 0.1); 
@@ -337,7 +337,7 @@ p {
 }
 
 
-.project2-header {
+.project1-header {
     background-image: url("../assets/images/topbgimg_20251217.png");
     background-size: cover;
     background-position: left;
@@ -348,13 +348,13 @@ p {
     text-align: left;
 }
 
-.project2-header h1 {
+.project1-header h1 {
     margin-top: 0;
     margin-bottom: 20px;
     font-size: 2.5rem; 
 }
 
-.project2-header p {
+.project1-header p {
     max-width: 1200px;
     margin: 0;
     line-height: 1.8;
