@@ -25,8 +25,8 @@ export class Navigation {
             link.addEventListener("click", (event) => {
                 // block default button action
                 event.preventDefault(); 
-                const menupage = [0,1,2,7]; // page number for button
-                this.goto(menupage[index]); 
+                const pageidx = [0,1,2,7]; // page number for button
+                this.goto(pageidx[index]); 
             });
         });
 
@@ -43,7 +43,6 @@ export class Navigation {
         this.goto(0, false);
 
         // console.log(`Navigation initialized (${this.totalPages} pages).`);
-
     }
 
     goto(index, smooth = true) {
