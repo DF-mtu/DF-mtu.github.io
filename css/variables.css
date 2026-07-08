@@ -6,17 +6,24 @@
     --color-primary: #2563eb;
     --color-primary-light: #3b82f6;
     --color-primary-dark: #1d4ed8;
+    --color-primary-darker: #004d99;
 
     --color-background: #ffffff;
-    --color-surface: #f8fafc;
+    --color-background-black: #1d1d1d;
+    --color-surface: #f0f4f8;
+    --color-surface-light: #fafafa;
 
     --color-text: #111111;
     --color-text-light: #222222;
+    --color-text-lighter: #333333;
+    --color-text-lighterer: #555555;
+    --color-text-lightest: #666666;
     --color-text-white: #f8fafc;
+    --color-highlight: #FFD54F;
 
     --color-border: #dddddd;
+    --color-border-light: #eeeeee;
     --color-shadow: rgba(0, 0, 0, 0.12);
-
 
     --font-family:
 
