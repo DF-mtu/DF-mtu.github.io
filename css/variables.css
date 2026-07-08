@@ -38,8 +38,9 @@
         sans-serif;
 
     --font-size-xs: 0.75rem;
-    --font-size-sm: 0.875rem;
+    --font-size-sm: 0.95rem;
     --font-size-md: 1rem;
+    --font-size-mdp: 1.1rem;
     --font-size-lg: 1.25rem;
     --font-size-xl: 2rem;
     --font-size-xxl: 3.5rem;
@@ -50,28 +51,29 @@
     --font-weight-bold: 700;
 
     --line-height: 1.6;
+    --line-height-large: 1.8;
 
-    --space-xs: 0.25rem;
     --space-sm: 0.5rem;
     --space-md: 1rem;
     --space-lg: 2rem;
     --space-xl: 4rem;
-    --space-xxl: 6rem;
 
     --radius-sm: 6px;
     --radius-md: 12px;
     --radius-lg: 20px;
     --radius-xl: 30px;
 
+    --shadow-xs:
+        0 4px 6px rgba(0,0,0,0.08);
 
     --shadow-small:
-        0 2px 8px rgba(0,0,0,0.08);
+        0 4px 15px rgba(0, 0, 0, 0.1);
 
     --shadow-medium:
-        0 6px 20px rgba(0,0,0,0.12);
+        0 8px 25px rgba(0, 0, 0, 0.2);
 
     --shadow-large:
-        0 15px 40px rgba(0,0,0,0.18);
+        0 10px 40px rgba(0,0,0, 0.08);
 
     --transition-fast: 0.2s;
 

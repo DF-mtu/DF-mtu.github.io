@@ -27,7 +27,7 @@ export class WheelController {
             { passive: false }
         );
 
-        console.log("Wheel controller initialized.");
+        // console.log("Wheel controller initialized.");
 
     }
 
