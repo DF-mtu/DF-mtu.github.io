@@ -256,8 +256,8 @@ p {
 
 .btn-cv-download {
     padding: 0.8rem 1.8rem;
-    background-color: var(--color-text-light);
-    color: var(--color-background);
+    background-color: var(--color-background-black);
+    color: var(--color-text-white);
     text-decoration: none;
     border-radius: var(--radius-xl);
     font-weight: 600;
@@ -266,6 +266,21 @@ p {
 
 .btn-cv-download:hover {
     background-color: var(--color-primary-dark);
+}
+
+
+.btn-demo {
+    padding: 0.8rem 1.8rem;
+    background-color: var(--color-primary-darker);
+    color: var(--color-text-white);
+    text-decoration: none;
+    border-radius: var(--radius-xl);
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn-demo:hover {
+    background-color: var(--color-highlight);
 }
 
 .profile-image-wrapper img {
