@@ -973,6 +973,9 @@ p {
     .home-image-block{
         display: none;
     }
+    .hero-cta-group {
+        flex-direction: column;
+    }
     
     .about-grid {
         grid-template-columns: 1fr;
@@ -1009,6 +1012,10 @@ p {
 
     .timeline{
         padding-left: 0px;
+    }
+
+    .timeline-dot{
+        display: none;
     }
 
     .timeline-content h2 {
