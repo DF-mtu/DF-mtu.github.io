@@ -8,6 +8,8 @@ export class Navigation {
         this.totalPages = 0;
         this.isAnimating = false;
         this.animationDuration = 200;
+        this.resizeFrame = null;
+        this.handleResize = this.handleResize.bind(this);
     }
 
     initialize() {
@@ -42,7 +44,33 @@ export class Navigation {
         });
         this.goto(0, false);
 
+        window.addEventListener("resize", this.handleResize);
+
         // console.log(`Navigation initialized (${this.totalPages} pages).`);
+    }
+
+    handleResize() {
+        if (this.resizeFrame !== null) {
+            window.cancelAnimationFrame(this.resizeFrame);
+        }
+
+        this.resizeFrame = window.requestAnimationFrame(() => {
+            this.resizeFrame = null;
+            this.alignCurrentPage();
+        });
+    }
+
+    alignCurrentPage() {
+        const page = this.pages[this.currentPage];
+
+        if (!page) {
+            return;
+        }
+
+        page.scrollIntoView({
+            behavior: "auto",
+            block: "start"
+        });
     }
 
     goto(index, smooth = true) {

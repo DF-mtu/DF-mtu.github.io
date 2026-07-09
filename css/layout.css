@@ -143,7 +143,7 @@ body {
 
     max-width: var(--content-width);
 
-    margin: auto;
+    margin: 0 auto;
 
 }
 
