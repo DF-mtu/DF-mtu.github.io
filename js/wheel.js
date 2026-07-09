@@ -9,12 +9,6 @@ export class WheelController {
         // Ignore tiny trackpad movements
         this.threshold = 30;
 
-        // Minimum time between page switches (ms)
-        this.cooldown = 50;
-
-
-        this.lastScrollTime = 0;
-
         this.handleWheel = this.handleWheel.bind(this);
 
     }
@@ -32,43 +26,20 @@ export class WheelController {
     }
 
     handleWheel(event) {
-        const now = Date.now();
-        if (now - this.lastScrollTime < this.cooldown) {
-            return;
-        }
-
         const delta = event.deltaY;
         if (Math.abs(delta) < this.threshold) {
             return;
         }
 
-        const currentSection = this.navigation.pages[this.navigation.currentPage];
-        
-        if (currentSection) {
-            const scrollTop = currentSection.scrollTop; 
-            const scrollHeight = currentSection.scrollHeight; 
-            const clientHeight = currentSection.clientHeight; 
-            const isOverflowing = scrollHeight > clientHeight;
+        const direction = delta > 0 ? 1 : -1;
 
-            if (isOverflowing) {
-                if (delta > 0 && scrollTop + clientHeight < scrollHeight - 2) {
-                    return; 
-                }
-                if (delta < 0 && scrollTop > 2) {
-                    return; 
-                }
-            }
+        if (this.navigation.canScrollCurrentPage(direction)) {
+            return;
         }
 
         event.preventDefault(); 
 
-        this.lastScrollTime = now;
-
-        if (delta > 0) {
-            this.navigation.next();
-        } else {
-            this.navigation.previous();
-        }
+        this.navigation.move(direction);
     }
 
 }

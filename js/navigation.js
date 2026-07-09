@@ -6,8 +6,8 @@ export class Navigation {
         this.pages = [];
         this.currentPage = 0;
         this.totalPages = 0;
-        this.isAnimating = false;
-        this.animationDuration = 200;
+        this.isSwitching = false;
+        this.switchDelay = 250;
         this.resizeFrame = null;
         this.handleResize = this.handleResize.bind(this);
     }
@@ -74,16 +74,16 @@ export class Navigation {
     }
 
     goto(index, smooth = true) {
-        if (this.isAnimating) {
-            return;
+        if (this.isSwitching) {
+            return false;
         }
 
         if (index < 0 || index >= this.totalPages) {
-            return;
+            return false;
         }
 
         this.currentPage = index;
-        this.isAnimating = true;
+        this.isSwitching = true;
 
         this.pages[index].scrollIntoView({
             behavior: smooth ? "smooth" : "auto",
@@ -91,22 +91,45 @@ export class Navigation {
         });
 
         window.setTimeout(() => {
-            this.isAnimating = false;
-        }, this.animationDuration);
+            this.isSwitching = false;
+        }, smooth ? this.switchDelay : 0);
+
+        return true;
+    }
+
+    move(direction) {
+        return this.goto(this.currentPage + direction);
+    }
+
+    canScrollCurrentPage(direction) {
+        const currentSection = this.pages[this.currentPage];
+
+        if (!currentSection) {
+            return false;
+        }
+
+        const scrollTop = currentSection.scrollTop;
+        const scrollHeight = currentSection.scrollHeight;
+        const clientHeight = currentSection.clientHeight;
+        const isOverflowing = scrollHeight > clientHeight;
+
+        if (!isOverflowing) {
+            return false;
+        }
+
+        if (direction > 0) {
+            return scrollTop + clientHeight < scrollHeight - 2;
+        }
+
+        return scrollTop > 2;
     }
 
     next() {
-        if (this.currentPage >= this.totalPages - 1) {
-            return;
-        }
-        this.goto(this.currentPage + 1);
+        return this.move(1);
     }
 
     previous() {
-        if (this.currentPage <= 0) {
-            return;
-        }
-        this.goto(this.currentPage - 1);
+        return this.move(-1);
     }
 
     getCurrentPage() {

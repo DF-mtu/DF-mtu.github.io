@@ -9,13 +9,8 @@ export class TouchController {
         // minimum swipe distance before changing page
         this.threshold = 50;
 
-        // minimum time between page switches (ms)
-        this.cooldown = 500;
-
         this.touchStartX = 0;
         this.touchStartY = 0;
-
-        this.lastSwitchTime = 0;
 
         this.handleTouchStart = this.handleTouchStart.bind(this);
         this.handleTouchMove = this.handleTouchMove.bind(this);
@@ -56,12 +51,6 @@ export class TouchController {
             return;
         }
 
-        const now = Date.now();
-
-        if (now - this.lastSwitchTime < this.cooldown) {
-            return;
-        }
-
         const touch = event.touches[0];
 
         const deltaX = touch.clientX - this.touchStartX;
@@ -77,55 +66,16 @@ export class TouchController {
             return;
         }
 
-        const currentSection =
-            this.navigation.pages[this.navigation.currentPage];
+        const direction = deltaY < 0 ? 1 : -1;
 
-        if (currentSection) {
-
-            const scrollTop = currentSection.scrollTop;
-            const scrollHeight = currentSection.scrollHeight;
-            const clientHeight = currentSection.clientHeight;
-
-            const isOverflowing =
-                scrollHeight > clientHeight;
-
-            if (isOverflowing) {
-
-                // swipe up
-                if (deltaY < 0) {
-
-                    // still not at bottom 
-                    if (scrollTop + clientHeight < scrollHeight - 2) {
-                        return;
-                    }
-
-                }
-
-                // swipe down
-                else {
-
-                    // still not at top
-                    if (scrollTop > 2) {
-                        return;
-                    }
-
-                }
-
-            }
-
+        if (this.navigation.canScrollCurrentPage(direction)) {
+            return;
         }
 
         // Prevent browser bounce / overscroll
         event.preventDefault();
 
-        this.lastSwitchTime = now;
-
-        if (deltaY < 0) {
-            this.navigation.next();
-        }
-        else {
-            this.navigation.previous();
-        }
+        this.navigation.move(direction);
 
     }
 
