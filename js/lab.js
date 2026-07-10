@@ -105,7 +105,7 @@ light.shadow.bias = -0.001;
 scene.add(light);
 
 const loader = new GLTFLoader();
-loader.load("assets/models/lab2.glb", (gltf) => {
+loader.load("assets/models/lab314.glb", (gltf) => {
     gltf.scene.traverse(function(node) {
             if (node.isMesh) {
                 node.castShadow = true; 
