@@ -59,7 +59,7 @@ scene.add(light);
 const loader = new GLTFLoader();
 
 loader.load(
-    "models/lab2.glb",
+    "models/lab314.glb",
 
     function(gltf){
 

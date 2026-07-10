@@ -801,7 +801,7 @@ p {
 
 .result-image{
 
-    max-width:420px;
+    max-width:560px;
 
     margin:30px auto;
 
@@ -873,7 +873,7 @@ p {
 
 .card-icon {
     font-size: var(--font-size-xl);
-    color: var(--color-primary-dark);
+    color: var(--color-primary-darker);
     margin-bottom: var(--space-md);
 }
 
