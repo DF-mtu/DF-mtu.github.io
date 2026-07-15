@@ -12,6 +12,43 @@ document.addEventListener("DOMContentLoaded", () => {
     const navigation = new Navigation();
     navigation.initialize();
 
+    const scrollIndicator = document.getElementById("scroll-indicator");
+    const scrollIndicatorIcon = scrollIndicator?.querySelector("i");
+    const scrollIndicatorLabel = scrollIndicator?.querySelector(".scroll-indicator-label");
+
+    const updateScrollIndicator = () => {
+        if (!scrollIndicator) {
+            return;
+        }
+
+        const isLastPage = navigation.getCurrentPage() === navigation.getTotalPages() - 1;
+        const label = isLastPage ? "Back to top" : "Go to next section";
+
+        scrollIndicator.setAttribute("aria-label", label);
+        scrollIndicator.title = label;
+
+        if (scrollIndicatorLabel) {
+            scrollIndicatorLabel.textContent = isLastPage ? "Back to top" : "Scroll";
+        }
+
+        if (scrollIndicatorIcon) {
+            scrollIndicatorIcon.classList.toggle("fa-arrow-down-long", !isLastPage);
+            scrollIndicatorIcon.classList.toggle("fa-arrow-up-long", isLastPage);
+        }
+    };
+
+    scrollIndicator?.addEventListener("click", () => {
+        if (navigation.getCurrentPage() === navigation.getTotalPages() - 1) {
+            navigation.goto(0);
+            return;
+        }
+
+        navigation.next();
+    });
+
+    document.addEventListener("navigation:pagechange", updateScrollIndicator);
+    updateScrollIndicator();
+
     // Mouse Wheel
     const wheel = new WheelController(navigation);
     wheel.initialize();

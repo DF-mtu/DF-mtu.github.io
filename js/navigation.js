@@ -85,6 +85,13 @@ export class Navigation {
         this.currentPage = index;
         this.isSwitching = true;
 
+        document.dispatchEvent(new CustomEvent("navigation:pagechange", {
+            detail: {
+                currentPage: this.currentPage,
+                totalPages: this.totalPages
+            }
+        }));
+
         this.pages[index].scrollIntoView({
             behavior: smooth ? "smooth" : "auto",
             block: "start"
